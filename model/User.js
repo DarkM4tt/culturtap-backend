@@ -7,15 +7,15 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    name: {
+    userName: {
       type: String,
       required: true,
     },
-    place: {
+    userPlace: {
       type: String,
       required: true,
     },
-    rating: {
+    ratings: {
       type: String,
       required: true,
     },
@@ -24,6 +24,10 @@ const userSchema = new Schema(
       required: true,
     },
     age: {
+      type: String,
+      required: true,
+    },
+    avatar: {
       type: String,
       required: true,
     },
