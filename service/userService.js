@@ -1,10 +1,10 @@
 const User = require("../model/User");
 
-const getFilteredUser = async (search) => {
+const getFilteredUser = async (search, ascending) => {
   try {
 
     let query = {};
-    
+
     if (search) {
       query = {
         $or: [
@@ -14,7 +14,14 @@ const getFilteredUser = async (search) => {
       };
     }
 
-    const users = await User.find(query);
+    let sortOptions = {};
+    if (ascending && ascending.toLowerCase() === 'true') {
+      sortOptions = { ratings: 1 };
+    } else if (ascending && ascending.toLowerCase() === 'false') {
+      sortOptions = { ratings: -1 };
+    }
+
+    const users = await User.find(query).sort(sortOptions);
 
     return users;
   } catch (error) {
