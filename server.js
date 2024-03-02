@@ -1,12 +1,12 @@
 const expressJS = require("express");
-const { express, configureApp } = require("./config");
+const { express, configureApp, mongoose } = require("./config");
 
 const initializeServer = () => {
   const app = expressJS();
 
   const appInstance = { app }
 
-  configureApp([express]).apply(appInstance);
+  configureApp([express, mongoose]).apply(appInstance);
 
   return appInstance;
 };
