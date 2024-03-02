@@ -1,6 +1,6 @@
 const User = require("../model/User");
 
-const getFilteredUser = async (search, ascending) => {
+const getFilteredUser = async (search, ascending, page, limit) => {
   try {
 
     let query = {};
@@ -21,7 +21,12 @@ const getFilteredUser = async (search, ascending) => {
       sortOptions = { ratings: -1 };
     }
 
-    const users = await User.find(query).sort(sortOptions);
+    const options = {
+        page: parseInt(page, 10),
+        limit: parseInt(limit, 10),
+      };
+  
+      const users = await User.paginate(query, { ...options, sort: sortOptions });
 
     return users;
   } catch (error) {
